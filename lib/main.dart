@@ -1,4 +1,6 @@
+import 'package:counter_app_mobx/counter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,17 +31,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
+  final counter = Counter();
   @override
   Widget build(BuildContext context) {
-    debugPrint("build");
+    debugPrint(counter.value.toString());
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -51,15 +46,20 @@ class _MyHomePageState extends State<MyHomePage> {
             const Text(
               'You have pushed the button this many times:',
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+            Observer(builder: ((context) {
+              return Text(
+                "${counter.value}",
+                style: Theme.of(context).textTheme.headline4,
+              );
+            }))
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: (() {
+          counter.increment();
+          debugPrint(counter.value.toString());
+        }),
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
