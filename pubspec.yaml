@@ -38,6 +38,8 @@ dependencies:
   flutter_mobx: ^2.0.6+1
 
 dev_dependencies:
+  integration_test:
+    sdk: flutter
   flutter_test:
     sdk: flutter
   build_runner:
