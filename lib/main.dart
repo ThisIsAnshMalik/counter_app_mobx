@@ -47,14 +47,16 @@ class _MyHomePageState extends State<MyHomePage> {
               'You have pushed the button this many times:',
             ),
             Observer(builder: ((context) {
-              return Text("${counter.value}",
+              return Text(
+                  key: const Key("counter_value"),
+                  "${counter.value}",
                   style: Theme.of(context).textTheme.headlineLarge);
             }))
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        key: Key("Increment_button"),
+        key: const Key("Increment_button"),
         onPressed: (() {
           counter.increment();
         }),
